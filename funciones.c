@@ -29,23 +29,29 @@ float calcularPrecioTotal(float precios[], int nump) {
     return total;
 }
 
-int* encontrarExtremos(float precios[], int nump) {
-    static int indices[2]; 
-    indices[0] = 0; 
-    indices[1] = 0; 
+int encontrarMasCaro(float precios[], int nump) {
+    int indiceMasCaro = 0;  
 
     for (int i = 1; i < nump; i++) {
-        if (precios[i] > precios[indices[0]]) {
-            indices[0] = i; 
-        }
-        if (precios[i] < precios[indices[1]]) {
-            indices[1] = i;
+        if (precios[i] > precios[indiceMasCaro]) {
+            indiceMasCaro = i; 
         }
     }
 
-    return indices; 
+    return indiceMasCaro; 
 }
 
+int encontrarMasBarato(float precios[], int nump) {
+    int indiceMasBarato = 0; 
+
+    for (int i = 1; i < nump; i++) {
+        if (precios[i] < precios[indiceMasBarato]) {
+            indiceMasBarato = i;  
+        }
+    }
+
+    return indiceMasBarato; 
+}
 
 float calcularPrecioPromedio(float precios[], int nump) {
     return calcularPrecioTotal(precios, nump) / nump;
