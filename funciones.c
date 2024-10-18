@@ -15,11 +15,10 @@ int ingresarDatos(char nombres[][50], float precios[], int nump) {
             printf("Ingrese el precio del producto %d: ", i + 1);
         }
         
-        fflush(stdin);
+        fflush(stdin);        
     }
     return nump;
 }
-
 
 float calcularPrecioTotal(float precios[], int nump) {
     float total = 0.0;
