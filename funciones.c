@@ -2,28 +2,34 @@
 #include <string.h>
 #include "funciones.h"
 
-int ingresarDatos(char nombres[][50], float precios[], int nump) {
+int ingresarDatos(char nombres[][50], float precios[], int cantidades[], int nump) {
     for (int i = 0; i < nump; i++) {
-        printf("Ingrese el nombre del producto %d:", i + 1);
-        fgets(nombres[i], 50, stdin); 
+        printf("Ingrese el nombre del producto %d: ", i + 1);
+        fgets(nombres[i], 50, stdin);  
 
         printf("Ingrese el precio del producto %d: ", i + 1);
-    
-        while (scanf("%f", &precios[i]) != 1) { 
+        while (scanf("%f", &precios[i]) != 1) {
             printf("Error: debe ingresar un numero valido para el precio. Intente nuevamente.\n");
             fflush(stdin);
             printf("Ingrese el precio del producto %d: ", i + 1);
         }
-        
-        fflush(stdin);        
+
+        printf("Ingrese la cantidad en unidades del producto %d: ", i + 1);
+        while (scanf("%d", &cantidades[i]) != 1) {
+            printf("Error: debe ingresar un numero valido para la cantidad. Intente nuevamente.\n");
+            fflush(stdin);
+            printf("Ingrese la cantidad del producto %d: ", i + 1);
+        }
+
+        fflush(stdin); 
     }
     return nump;
 }
 
-float calcularPrecioTotal(float precios[], int nump) {
+float calcularPrecioTotal(float precios[], int cantidades[], int nump) {
     float total = 0.0;
     for (int i = 0; i < nump; i++) {
-        total += precios[i];
+        total += precios[i] * cantidades[i];  
     }
     return total;
 }
@@ -52,8 +58,13 @@ int encontrarMasBarato(float precios[], int nump) {
     return indiceMasBarato; 
 }
 
-float calcularPrecioPromedio(float precios[], int nump) {
-    return calcularPrecioTotal(precios, nump) / nump;
+float calcularPrecioPromedio(float precios[], int cantidades[], int nump) {
+    float total = calcularPrecioTotal(precios, cantidades, nump);
+    int cantidadTotal = 0;
+    for (int i = 0; i < nump; i++) {
+        cantidadTotal += cantidades[i];
+    }
+    return total / cantidadTotal;
 }
 
 float buscarProductoPorNombre(char nombres[][50], float precios[], int nump, char nombreBuscado[]) {

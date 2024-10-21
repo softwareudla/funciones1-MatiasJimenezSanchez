@@ -5,22 +5,35 @@
 #define MAX_PRODUCTOS 10
 
 int main() {
-    char nombres[MAX_PRODUCTOS][50];
-    float precios[MAX_PRODUCTOS];
-    int nump;
+  char nombres[MAX_PRODUCTOS][50];  
+  float precios[MAX_PRODUCTOS];         
+  int cantidades[MAX_PRODUCTOS];    
+  int nump;                         
 
-    printf("Ingrese el numero de productos (maximo %d): ", MAX_PRODUCTOS);
-    scanf("%d", &nump);
 
-    if (nump > MAX_PRODUCTOS) {
-        printf("Numero de productos excede el maximo permitido.\n");
-        return 0;
+    while (1) {
+        printf("Ingrese el numero de productos (maximo %d): ", MAX_PRODUCTOS);
+        scanf("%d", &nump);
+
+        if (nump > MAX_PRODUCTOS) {
+            printf("Numero de productos excede el maximo permitido.\n");
+            printf("Ingrese 1 para intentarlo de nuevo o 0 para salir del programa: ");
+            int opcion;
+            scanf("%d", &opcion);
+
+            if (opcion == 0) {
+                printf("Saliendo del programa...\n");
+                return 0;
+            }
+        } else {
+            break;
+        }
     }
 
     fflush(stdin);
-    ingresarDatos(nombres, precios, nump);
+    ingresarDatos(nombres, precios, cantidades, nump);  
 
-    float total = calcularPrecioTotal(precios, nump);
+    float total = calcularPrecioTotal(precios, cantidades, nump); 
     printf("El precio total del inventario es: %.2f\n", total);
 
     int indiceMasCaro = encontrarMasCaro(precios, nump);
@@ -28,7 +41,7 @@ int main() {
     printf("Producto mas caro: %s con un precio de %.2f\n", nombres[indiceMasCaro], precios[indiceMasCaro]);
     printf("Producto mas barato: %s con un precio de %.2f\n", nombres[indiceMasBarato], precios[indiceMasBarato]);
 
-    float promedio = calcularPrecioPromedio(precios, nump);
+    float promedio = calcularPrecioPromedio(precios, cantidades, nump); 
     printf("El precio promedio es: %.2f\n", promedio);
 
       int opcion = 1; 
