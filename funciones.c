@@ -5,7 +5,7 @@
 int ingresarDatos(char nombres[][50], float precios[], int cantidades[], int nump) {
     for (int i = 0; i < nump; i++) {
         printf("Ingrese el nombre del producto %d: ", i + 1);
-        fgets(nombres[i], 50, stdin);  
+        fgets(nombres[i], 50, stdin);
 
         printf("Ingrese el precio del producto %d: ", i + 1);
         while (scanf("%f", &precios[i]) != 1) {
