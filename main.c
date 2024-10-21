@@ -8,7 +8,7 @@ int main() {
   char nombres[MAX_PRODUCTOS][50];  
   float precios[MAX_PRODUCTOS];         
   int cantidades[MAX_PRODUCTOS];    
-  int nump;                         
+  int nump;              
 
 
     while (1) {
